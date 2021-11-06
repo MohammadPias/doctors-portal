@@ -3,12 +3,14 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import login from '../../../images/login.png'
 import { Alert, Button, CircularProgress, TextField, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth'
 
 const Login = () => {
     const [logInData, setLogInData] = useState({});
     const { user, handleEmailLogin, error, isLodding } = useAuth();
+    const history = useHistory();
+    const location = useLocation();
     console.log(logInData);
     console.log(user);
     const handleOnChange = (e) => {
@@ -21,7 +23,7 @@ const Login = () => {
     }
     const handleLogin = (e) => {
         e.preventDefault();
-        handleEmailLogin(logInData.email, logInData.password)
+        handleEmailLogin(logInData.email, logInData.password, history, location)
 
     }
     return (

@@ -6,6 +6,8 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import useAuth from '../../Hooks/useAuth'
+import { useState } from 'react';
 
 const style = {
     position: 'absolute',
@@ -20,11 +22,36 @@ const style = {
 };
 
 const BookingModel = ({ open, handleClose, book, date }) => {
+    const { user } = useAuth();
     const { name, time } = book;
+    const initialInfo = {
+        patientName: user?.name,
+        email: user?.email,
+
+    }
+    const [bookingInfo, setBookingInfo] = useState(initialInfo);
+    // console.log(bookingInfo)
+
+    const handleOnBlur = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+
+        const newInfo = { ...bookingInfo };
+        newInfo[field] = value;
+        console.log(newInfo);
+        setBookingInfo(newInfo);
+    }
 
     const handleBooking = e => {
         e.preventDefault();
-        alert('Your booking is successful');
+
+        const appointment = {
+            ...bookingInfo,
+            time,
+            serviceName: name,
+            date: date.date.toLocaleDateString()
+        }
+        console.log(appointment)
         handleClose();
     }
     return (
@@ -65,20 +92,26 @@ const BookingModel = ({ open, handleClose, book, date }) => {
                                 required
                                 style={{ width: '90%', margin: '8px' }}
                                 id="outlined-size-small"
-                                placeholder="Name"
+                                onBlur={handleOnBlur}
+                                name="patientName"
+                                defaultValue={user?.displayName}
                                 size="small"
                             />
                             <TextField
                                 required
                                 style={{ width: '90%', margin: '8px' }}
                                 id="outlined-size-small"
-                                placeholder="Email"
+                                onBlur={handleOnBlur}
+                                name="email"
+                                defaultValue={user.email}
                                 size="small"
                             />
                             <TextField
                                 required
                                 style={{ width: '90%', margin: '8px' }}
                                 id="outlined-size-small"
+                                onBlur={handleOnBlur}
+                                name="phone"
                                 placeholder="Phone"
                                 size="small"
                             />

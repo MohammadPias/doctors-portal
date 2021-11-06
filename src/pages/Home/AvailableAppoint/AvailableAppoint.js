@@ -44,9 +44,6 @@ const bookings = [
 ]
 
 const AvailableAppoint = ({ date }) => {
-
-
-    console.log(date)
     return (
         <Container>
             <h2>Booking Available on {date.toDateString()}</h2>

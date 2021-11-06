@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import initializeAuthentication from "../Login/Firebase/Firebase.init";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 initializeAuthentication();
 const useFirebase = () => {
@@ -9,6 +9,7 @@ const useFirebase = () => {
     const [isLodding, setIsLodding] = useState(true);
 
     const auth = getAuth();
+    const googleProvider = new GoogleAuthProvider();
 
     // Handle email password register
     const handleEmailRegister = (email, password) => {
@@ -26,6 +27,23 @@ const useFirebase = () => {
 
             .finally(() => setIsLodding(false))
     };
+
+    //handle google sign in
+
+    const googleSignin = (history, location) => {
+        setIsLodding(true)
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                const destination = location?.state?.from || '/home';
+                history.replace(destination);
+                setUser(result.user);
+                setError('');
+            }).catch((error) => {
+                setError(error.message);
+                setUser('');
+            })
+            .finally(() => setIsLodding(false))
+    }
 
     // handle email password login
     const handleEmailLogin = (email, password, history, location) => {
@@ -84,7 +102,8 @@ const useFirebase = () => {
         isLodding,
         handleEmailLogin,
         handleEmailRegister,
-        handleLogOut
+        handleLogOut,
+        googleSignin
     }
 };
 export default useFirebase;

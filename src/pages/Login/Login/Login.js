@@ -8,7 +8,7 @@ import useAuth from '../../Hooks/useAuth'
 
 const Login = () => {
     const [logInData, setLogInData] = useState({});
-    const { user, handleEmailLogin, error, isLodding } = useAuth();
+    const { user, handleEmailLogin, error, isLodding, googleSignin } = useAuth();
     const history = useHistory();
     const location = useLocation();
     console.log(logInData);
@@ -25,6 +25,9 @@ const Login = () => {
         e.preventDefault();
         handleEmailLogin(logInData.email, logInData.password, history, location)
 
+    };
+    const handleGoogleSignin = () => {
+        googleSignin(history, location);
     }
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -61,6 +64,7 @@ const Login = () => {
                         <NavLink style={{ textDecoration: 'none' }} to="/register">
                             <Typography variant="p">Don't have an account? Register</Typography>
                         </NavLink>
+                        <Button onClick={handleGoogleSignin} sx={{ width: '75%', my: 3 }} variant="contained">Google Sign IN</Button>
                     </form>
                 </Grid>
                 <Grid item xs={12} md={6}>

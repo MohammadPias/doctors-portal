@@ -28,7 +28,7 @@ const Navigation = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Doctors Portal
                     </Typography>
-                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to='/appoint'>
+                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to='/appointments'>
                         <Button color="inherit">Appoint</Button>
                     </NavLink>
                     {

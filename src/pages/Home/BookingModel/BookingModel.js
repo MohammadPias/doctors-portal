@@ -21,7 +21,8 @@ const style = {
     p: 4,
 };
 
-const BookingModel = ({ open, handleClose, book, date }) => {
+const BookingModel = ({ open, handleClose, book, date, setBooked }) => {
+    // const [addAppoint, setAddAppoint] = useState([]);
     const { user } = useAuth();
     const { name, time } = book;
     const initialInfo = {
@@ -38,7 +39,7 @@ const BookingModel = ({ open, handleClose, book, date }) => {
 
         const newInfo = { ...bookingInfo };
         newInfo[field] = value;
-        console.log(newInfo);
+        // console.log(newInfo);
         setBookingInfo(newInfo);
     }
 
@@ -51,8 +52,20 @@ const BookingModel = ({ open, handleClose, book, date }) => {
             serviceName: name,
             date: date.date.toLocaleDateString()
         }
-        console.log(appointment)
-        handleClose();
+        fetch('http://localhost:5000/appointments', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(appointment)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.insertedId) {
+                    setBooked(true)
+                    handleClose();
+                }
+            })
     }
     return (
         <div>

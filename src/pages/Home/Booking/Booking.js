@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import BookingModel from '../BookingModel/BookingModel';
 import { handleBreakpoints } from '@mui/system';
 
-const Booking = ({ book, date }) => {
+const Booking = ({ book, date, setBooked }) => {
     const { name, time, space } = book;
 
     const [open, setOpen] = React.useState(false);
@@ -31,6 +31,7 @@ const Booking = ({ book, date }) => {
                 handleClose={handleClose}
                 book={book}
                 date={{ date }}
+                setBooked={setBooked}
             ></BookingModel>
         </>
     );

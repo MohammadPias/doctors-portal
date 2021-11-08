@@ -37,7 +37,12 @@ const Navigation = () => {
                                 <Button color="inherit">Login</Button>
                             </NavLink>
                             :
-                            <Button onClick={handleLogOut} color="inherit">Sign Out</Button>
+                            <Box>
+                                <NavLink style={{ textDecoration: 'none', color: 'white' }} to='/dashboard'>
+                                    <Button color="inherit">Dashboard</Button>
+                                </NavLink>
+                                <Button onClick={handleLogOut} color="inherit">Sign Out</Button>
+                            </Box>
                     }
                 </Toolbar>
             </AppBar>

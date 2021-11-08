@@ -6,8 +6,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
 
 const Calander = ({ date, setDate }) => {
-
-    console.log(date)
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <StaticDatePicker

@@ -16,7 +16,7 @@ const Appointments = ({ date }) => {
     const newDate = date.toLocaleDateString();
 
     useEffect(() => {
-        const url = `http://localhost:5000/appointments?email=${user.email}&date=${newDate}`;
+        const url = `https://protected-waters-90005.herokuapp.com/appointments?email=${user.email}&date=${newDate}`;
         fetch(url)
             .then(res => res.json())
             .then(result => {

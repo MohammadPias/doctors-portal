@@ -52,7 +52,7 @@ const BookingModel = ({ open, handleClose, book, date, setBooked }) => {
             serviceName: name,
             date: date.date.toLocaleDateString()
         }
-        fetch('http://localhost:5000/appointments', {
+        fetch('https://protected-waters-90005.herokuapp.com/appointments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

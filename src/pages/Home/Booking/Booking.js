@@ -2,7 +2,6 @@ import { Grid, Paper, Button } from '@mui/material';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import BookingModel from '../BookingModel/BookingModel';
-import { handleBreakpoints } from '@mui/system';
 
 const Booking = ({ book, date, setBooked }) => {
     const { name, time, space } = book;
@@ -22,6 +21,9 @@ const Booking = ({ book, date, setBooked }) => {
                     </Typography>
                     <Typography sx={{ mt: 1 }} variant="h6" >
                         Remaining-Seat: {space}
+                    </Typography>
+                    <Typography sx={{ mt: 1 }} variant="h6" >
+                        Price: ${space}
                     </Typography>
                     <Button onClick={handleOpen} sx={{ mt: 1 }} variant='contained'>Booking Now</Button>
                 </Paper>

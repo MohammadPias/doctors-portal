@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 
 const Appointments = ({ date }) => {
     const [appointments, setAppointments] = useState([]);
@@ -24,6 +25,7 @@ const Appointments = ({ date }) => {
                 console.log(result)
             })
     }, [date]);
+    console.log(appointments);
     return (
         <div>
             <h4>Appointments {appointments.length}</h4>
@@ -33,7 +35,8 @@ const Appointments = ({ date }) => {
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="right">Time</TableCell>
-                            <TableCell align="right">Date</TableCell>
+                            <TableCell align="right">Service</TableCell>
+                            <TableCell align="right">Price</TableCell>
                             <TableCell align="right">Action</TableCell>
                         </TableRow>
                     </TableHead>
@@ -47,8 +50,11 @@ const Appointments = ({ date }) => {
                                     {row.patientName}
                                 </TableCell>
                                 <TableCell align="right">{row.time}</TableCell>
-                                <TableCell align="right">{row.date}</TableCell>
-                                <TableCell align="right">approve</TableCell>
+                                <TableCell align="right">{row.serviceName}</TableCell>
+                                <TableCell align="right">{`$${row.price}`}</TableCell>
+                                <TableCell align="right">{row.payment ? "Paid" :
+                                    <Link to={`dashboard/payment/${row._id}`}><button>pay</button></Link>
+                                }</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

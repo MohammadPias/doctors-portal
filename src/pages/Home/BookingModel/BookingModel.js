@@ -24,7 +24,7 @@ const style = {
 const BookingModel = ({ open, handleClose, book, date, setBooked }) => {
     // const [addAppoint, setAddAppoint] = useState([]);
     const { user } = useAuth();
-    const { name, time } = book;
+    const { name, time, price } = book;
     const initialInfo = {
         patientName: user?.name,
         email: user?.email,
@@ -49,6 +49,7 @@ const BookingModel = ({ open, handleClose, book, date, setBooked }) => {
         const appointment = {
             ...bookingInfo,
             time,
+            price: price,
             serviceName: name,
             date: date.date.toLocaleDateString()
         }
@@ -87,6 +88,13 @@ const BookingModel = ({ open, handleClose, book, date, setBooked }) => {
                             {name}
                         </Typography>
                         <form onSubmit={handleBooking}>
+                            <TextField
+                                disabled
+                                style={{ width: '90%', margin: '8px' }}
+                                id="outlined-size-small"
+                                defaultValue={`Price: $${price}`}
+                                size="small"
+                            />
                             <TextField
                                 disabled
                                 style={{ width: '90%', margin: '8px' }}
